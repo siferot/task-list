@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+* {
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: rgb(248, 248, 248);
+}
+
+header {
+    height: 100px;
+    width: 100vw;
+    box-shadow: 0px 0px 10px 0px rgb(92, 92, 92);
+    background-color: white;
+    position: fixed;
+}
+
+.add {
+    &__list-container {
+        border-radius: 50%;
+        background-color: rgb(248, 248, 248);
+        height: 80%;
+        aspect-ratio: 1;
+        left: 50%;
+        top: 10%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0px 0px 10px 0px rgb(92, 92, 92);
+    }
+    &__list-btn {
+        position: absolute;
+        border: none;
+        background-color: transparent;
+        width: 80%;
+        height: 80%;
+        font-size: 50px;
+        border-radius: 50%;
+        background-color: greenyellow;
+        // box-shadow: 0px 0px 10px 0px rgb(92, 92, 92);
+    }
+}
+
+.container {
+    width: 800px;
+    margin: auto;
+    padding: 30px;
+    padding-top: 120px;
+}
+
+.task {
+    // .task__list
+    &__list {
+        // border: 2px greenyellow solid;
+        break-inside: avoid;
+        box-shadow: 0px 0px 10px 0px rgb(92, 92, 92);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    // .task__list-title
+    &__list-title {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+    // .task__list-list
+    &__list-list {}
+    // .task__list-item
+    &__list-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        margin-bottom: 15px;
+        position: relative;
+        &:last-child {
+            margin-bottom: 20px;
+        }
+        &:after {
+            content: '';
+            height: 1px;
+            background-color: green;
+            width: 80%;
+            position: absolute;
+            bottom: -5px;
+        }
+    }
+    // .task__list-text
+    &__list-text {}
+    // .task__list-form
+    &__list-form {}
+    // .task__list-input
+    &__list-input {
+        padding: 5px;
+        outline-color: green;
+        border: 1px green solid;
+        border-radius: 5px
+    }
+    // .task__list-btn
+    &__list-btn {
+        padding: 5px 10px;
+        border: 1px green solid;
+        background-color: greenyellow;
+        border-radius: 5px;
+    }
+    &__list-deleteTaskBtn {
+        border: none;
+        background-color: transparent;
+    }
+}

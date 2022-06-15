@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+* {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #f8f8f8;
+}
+
+header {
+  height: 100px;
+  width: 100vw;
+  -webkit-box-shadow: 0px 0px 10px 0px #5c5c5c;
+          box-shadow: 0px 0px 10px 0px #5c5c5c;
+  background-color: white;
+  position: fixed;
+}
+
+.add__list-container {
+  border-radius: 50%;
+  background-color: #f8f8f8;
+  height: 80%;
+  aspect-ratio: 1;
+  left: 50%;
+  top: 10%;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: inset 0px 0px 10px 0px #5c5c5c;
+          box-shadow: inset 0px 0px 10px 0px #5c5c5c;
+}
+
+.add__list-btn {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  width: 80%;
+  height: 80%;
+  font-size: 50px;
+  border-radius: 50%;
+  background-color: greenyellow;
+}
+
+.container {
+  width: 800px;
+  margin: auto;
+  padding: 30px;
+  padding-top: 120px;
+}
+
+.task__list {
+  -webkit-column-break-inside: avoid;
+          break-inside: avoid;
+  -webkit-box-shadow: 0px 0px 10px 0px #5c5c5c;
+          box-shadow: 0px 0px 10px 0px #5c5c5c;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.task__list-title {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.task__list-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style: none;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.task__list-item:last-child {
+  margin-bottom: 20px;
+}
+
+.task__list-item:after {
+  content: '';
+  height: 1px;
+  background-color: green;
+  width: 80%;
+  position: absolute;
+  bottom: -5px;
+}
+
+.task__list-input {
+  padding: 5px;
+  outline-color: green;
+  border: 1px green solid;
+  border-radius: 5px;
+}
+
+.task__list-btn {
+  padding: 5px 10px;
+  border: 1px green solid;
+  background-color: greenyellow;
+  border-radius: 5px;
+}
+
+.task__list-deleteTaskBtn {
+  border: none;
+  background-color: transparent;
+}
+/*# sourceMappingURL=style.css.map */
