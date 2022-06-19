@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+$button-base: greenyellow;
+$button-hovered: rgb(156,
+231,
+44);
 * {
     font-family: "Montserrat", sans-serif;
     padding: 0;
@@ -11,10 +15,14 @@ body {
 
 header {
     height: 100px;
-    width: 100vw;
+    width: 100%;
     box-shadow: 0px 0px 10px 0px rgb(92, 92, 92);
     background-color: white;
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
 }
 
 .add {
@@ -23,24 +31,32 @@ header {
         background-color: rgb(248, 248, 248);
         height: 80%;
         aspect-ratio: 1;
-        left: 50%;
-        top: 10%;
         position: absolute;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: inset 0px 0px 10px 0px rgb(92, 92, 92);
+        box-shadow: inset 0px 0px 5px 0px rgb(92, 92, 92);
+        svg {
+            position: absolute;
+        }
     }
-    &__list-btn {
-        position: absolute;
-        border: none;
-        background-color: transparent;
-        width: 80%;
-        height: 80%;
-        font-size: 50px;
-        border-radius: 50%;
-        background-color: greenyellow;
-        // box-shadow: 0px 0px 10px 0px rgb(92, 92, 92);
+    &__button-background {
+        circle {
+            cursor: pointer;
+            transition: fill .3s;
+            box-shadow: 0px 0px 5px 0px rgb(92, 92, 92);
+        }
+        circle:hover {
+            fill: $button-hovered;
+        }
+    }
+    &__button-plus {
+        cursor: pointer;
+        fill: rgb(255, 255, 255);
+        z-index: 1;
+        &:hover~.add__button-background {
+            fill: $button-hovered;
+        }
     }
 }
 
@@ -73,42 +89,120 @@ header {
     &__list-item {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        // align-items: center;
         list-style: none;
         margin-bottom: 15px;
         position: relative;
         &:last-child {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
-        &:after {
+        &:not(:last-child):after {
             content: '';
             height: 1px;
             background-color: green;
             width: 80%;
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
         }
     }
+    &__list-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+    }
     // .task__list-text
-    &__list-text {}
+    &__list-text {
+        font-size: 14px;
+        line-height: 21px;
+        outline-style: none;
+        border: none;
+        width: 100%;
+        overflow-y: hidden;
+        word-wrap: break-word;
+        resize: none;
+        z-index: 1;
+        background-color: transparent;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        // background-image: linear-gradient(rgba(0, 0, 0, 0) calc(100% - 1px), rgb(224, 224, 224) calc(100% - 1px));
+        // background-size: 100% 21px;
+        // &:focus {
+        //     background-image: linear-gradient(rgba(0, 0, 0, 0) calc(100% - 1px), rgb(161, 161, 161) calc(100% - 1px));
+        // }
+        &:hover~.task__list-underlines {
+            opacity: 1;
+        }
+    }
+    &__list-underlines {
+        background-image: linear-gradient(rgba(0, 0, 0, 0) calc(100% - 1px), rgb(117, 117, 117) calc(100% - 1px));
+        background-size: 100% 21px;
+        opacity: 0.3;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transition: opacity .3s;
+        &:hover {
+            opacity: 1;
+        }
+    }
     // .task__list-form
     &__list-form {}
     // .task__list-input
     &__list-input {
-        padding: 5px;
-        outline-color: green;
-        border: 1px green solid;
-        border-radius: 5px
+        // padding: 5px;
+        // outline-color: green;
+        // border: 1px green solid;
+        // border-radius: 5px
     }
     // .task__list-btn
     &__list-btn {
-        padding: 5px 10px;
-        border: 1px green solid;
-        background-color: greenyellow;
-        border-radius: 5px;
+        // padding: 5px 10px;
+        // margin-left: 10px;
+        // border: 1px green solid;
+        // background-color: greenyellow;
+        // border-radius: 5px;
+        // cursor: pointer;
+        // transition: background-color .3s;
+        // &:hover {
+        //     background-color: $button-hovered;
+        // }
     }
     &__list-deleteTaskBtn {
         border: none;
         background-color: transparent;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 10px 10px 15px 15px;
+        cursor: pointer;
+        transition: color .3s;
+        &:hover {
+            color: rgb(177, 19, 19);
+        }
     }
+}
+
+.btn {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: 1px green solid;
+    background-color: greenyellow;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .3s;
+    &:hover {
+        background-color: $button-hovered;
+    }
+}
+
+.input {
+    width: fit-content;
+    padding: 5px;
+    outline-color: green;
+    border: 1px green solid;
+    border-radius: 5px;
+    width: 30%;
 }

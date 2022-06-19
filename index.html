@@ -6,60 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css" type="text/css" />
-    <script defer src="./script.js"></script>
+    <script defer src="./script2.js"></script>
     <title>Task list</title>
 </head>
 
 <body>
     <header class="header">
-        <div class="add__list-container"><button class="add__list-btn">+</button></div>
+        <div class="add__list-container">
+
+            <svg class="add__button-plus" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="45.402px" height="45.402px" viewBox="0 0 45.402 45.402" fill="lightgray">
+        <path d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141
+		c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27
+		c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435
+		c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z" />
+      </svg>
+            <svg class="add__button-background" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="greenyellow">
+        <circle cx="30" cy="30" r="25" />
+      </svg>
+        </div>
 
     </header>
     <div class="container">
-        <section class="main__list" id="list">
-            <section class="task__list" id="taskList0">
-                <h1 class="task__list-title">First list</h1>
-                <div>
-                    <ul class="task__list-list">
-                        <li class="task__list-item">
-                            <h3 class="task__list-text">ASdasdasf</h3>
-                            <button class="task__list-deleteTaskBtn" id="list" type="button">X</button>
-                        </li>
-                        <li class="task__list-item">
-                            <h3 class="task__list-text">SDgfdhgdfhfdh</h3>
-                            <button class="task__list-deleteTaskBtn" id="list" type="button">X</button>
-                        </li>
-                    </ul>
-                </div>
-                <form class="task__list-form" id="newTask0">
-                    <input class="task__list-input" id="taskText0" type="text" placeholder="Enter new task">
-                    <button class="task__list-btn addTaskBtn" id="addTask0" type="button">Add task</button>
-                </form>
-            </section>
-            <section class="task__list" id="taskList1">
-                <h1 class="task__list-title">Second list</h1>
-                <div>
-                    <ul class="task__list-list">
-                        <li class="task__list-item">
-                            <h3 class="task__list-text">ASdasdasf</h3>
-                            <button class="task__list-deleteTaskBtn" id="list" type="button">X</button>
-                        </li>
-                        <li class="task__list-item">
-                            <h3 class="task__list-text">SDgfdhgdfhfdh</h3>
-                            <button class="task__list-deleteTaskBtn" id="list" type="button">X</button>
-                        </li>
-                    </ul>
-                </div>
-                <form class="task__list-form" id="newTask0">
-                    <input class="task__list-input" id="taskText0" type="text" placeholder="Enter new task">
-                    <button class="task__list-btn addTaskBtn" id="addTask0" type="button">Add task</button>
-                </form>
-
-            </section>
+        <section class="main__list" id="list"></section>
         </section>
         <form id="newList">
-            <input id="listName" type="text" placeholder="Enter new task list name">
-            <button id="addList" class="btn" type="button">Add task list</button>
+            <input class="input" id="listName" type="text" placeholder="Enter new task list name">
+            <button class="btn" id="addList" type="button">Add task list</button>
         </form>
     </div>
 </body>
