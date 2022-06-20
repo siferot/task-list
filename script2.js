@@ -1,30 +1,40 @@
 class TaskList {
-  constructor(id, name, parent) {
+  constructor(id, name, parent, tasks = []) {
     this.id = id;
     this.name = name;
     this.parent = parent;
-    this.tasks = [];
+    this.tasks = tasks;
   }
 
   renderTasks() {
     let taskList = document.createElement("ul");
     taskList.setAttribute("class", "task__list-list");
-    const tasksList = this.tasks.map((elem, id) => {
-      let taskItem = document.createElement("li");
-      taskItem.setAttribute("class", "task__list-item");
+    this.tasks.map((elem, id) => {
+      // let taskItem = document.createElement("li");
+      // taskItem.setAttribute("class", "task__list-item");
 
-      let title = document.createElement("h3");
-      title.setAttribute("class", "task__list-text");
-      title.innerHTML = title.innerHTML + elem;
+      // let title = document.createElement("h3");
+      // title.setAttribute("class", "task__list-text");
+      // title.innerHTML = title.innerHTML + elem;
 
-      let delBtn = document.createElement("button");
-      delBtn.setAttribute("class", "task__list-deleteTaskBtn");
-      delBtn.innerHTML = delBtn.innerHTML + "X";
+      // let titleContainer = document.createElement("div");
+      // titleContainer.classList.add("task__list-container");
 
-      taskItem.appendChild(title);
-      taskItem.appendChild(delBtn);
+      // let underlines = document.createElement("div");
+      // underlines.classList.add("task__list-underlines");
+      // titleContainer.appendChild(title);
+      // titleContainer.appendChild(underlines);
 
-      taskList.append(taskItem);
+      // let delBtn = document.createElement("button");
+      // delBtn.setAttribute("class", "task__list-deleteTaskBtn");
+      // delBtn.innerHTML = delBtn.innerHTML + "X";
+
+      // taskItem.appendChild(title);
+      // taskItem.appendChild(delBtn);
+
+      // taskList.append(taskItem);
+
+      taskList.append(this.createNewTask(elem));
     });
     return taskList;
   }
@@ -95,7 +105,7 @@ class List {
   }
 
   renderArray() {
-    let taskSectionArray;
+    let taskSectionArray = document.getElementById("list");
     this.listArray.forEach((list) => {
       let taskListSection = document.createElement("section");
       taskListSection.setAttribute("class", "task__list");
@@ -103,13 +113,28 @@ class List {
       let taskListTitle = document.createElement("h1");
       taskListTitle.setAttribute("class", "task__list-title");
       taskListTitle.innerHTML = list.name;
+      console.log(list);
 
-      list.tasks.forEach((task) => {
-        let taskDiv = document.createElement("div");
-        if (task.length > 0) {
-          taskDiv.appendChild(list.renderTasks());
-        }
-      });
+      const listObject = new TaskList(
+        list.id,
+        list.name,
+        taskListSection,
+        list.tasks
+      );
+
+      // let taskDiv = document.createElement("div");
+
+      // let taskList = document.createElement("ul");
+      // taskList.setAttribute("class", "task__list-list");
+
+      // taskDiv.appendChild(taskList);
+
+      // list.tasks.forEach((task) => {
+      //   if (task.length > 0) {
+      //     taskList.appendChild(listObject.renderTasks());
+      //   }
+      // });
+      let renderedTaskList = listObject.renderTasks();
 
       let newTaskInput = document.createElement("input");
       newTaskInput.setAttribute("class", "task__list-input");
@@ -150,7 +175,7 @@ class List {
       newTaskForm.appendChild(newTaskBtn);
 
       taskListSection.appendChild(taskListTitle);
-      taskListSection.appendChild(taskDiv);
+      taskListSection.appendChild(renderedTaskList);
       taskListSection.appendChild(newTaskForm);
 
       taskSectionArray.appendChild(taskListSection);
@@ -168,8 +193,14 @@ class List {
     taskListTitle.innerHTML = taskListTitle.innerHTML + list.name;
 
     let taskDiv = document.createElement("div");
+
+    let taskList = document.createElement("ul");
+    taskList.setAttribute("class", "task__list-list");
+
+    taskDiv.appendChild(taskList);
+
     if (list.tasks.length > 0) {
-      taskDiv.appendChild(list.renderTasks());
+      taskList.appendChild(list.renderTasks());
     }
 
     let newTaskInput = document.createElement("input");
@@ -211,7 +242,7 @@ class List {
     newTaskForm.appendChild(newTaskBtn);
 
     taskListSection.appendChild(taskListTitle);
-    taskListSection.appendChild(taskDiv);
+    taskListSection.appendChild(taskList);
     taskListSection.appendChild(newTaskForm);
 
     console.log(this.listArray);
@@ -224,6 +255,8 @@ class List {
     return this.createNewList(list);
   }
 }
+
+// localStorage.removeItem("taskList");
 let tasker = new List();
 console.log(JSON.parse(JSON.stringify(tasker)));
 if (localStorage.taskList) {
