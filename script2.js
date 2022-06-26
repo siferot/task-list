@@ -10,43 +10,14 @@ class TaskList {
     let taskList = document.createElement("ul");
     taskList.setAttribute("class", "task__list-list");
     this.tasks.map((elem, id) => {
-      // let taskItem = document.createElement("li");
-      // taskItem.setAttribute("class", "task__list-item");
-
-      // let title = document.createElement("h3");
-      // title.setAttribute("class", "task__list-text");
-      // title.innerHTML = title.innerHTML + elem;
-
-      // let titleContainer = document.createElement("div");
-      // titleContainer.classList.add("task__list-container");
-
-      // let underlines = document.createElement("div");
-      // underlines.classList.add("task__list-underlines");
-      // titleContainer.appendChild(title);
-      // titleContainer.appendChild(underlines);
-
-      // let delBtn = document.createElement("button");
-      // delBtn.setAttribute("class", "task__list-deleteTaskBtn");
-      // delBtn.innerHTML = delBtn.innerHTML + "X";
-
-      // taskItem.appendChild(title);
-      // taskItem.appendChild(delBtn);
-
-      // taskList.append(taskItem);
-
-      taskList.append(this.createNewTask(elem));
+      taskList.append(this.renderNewTask(elem));
     });
     return taskList;
   }
 
-  createNewTask(taskText) {
+  renderNewTask(taskText) {
     let taskItem = document.createElement("li");
     taskItem.setAttribute("class", "task__list-item");
-
-    // let title = document.createElement("h3");
-    // title.setAttribute("class", "task__list-text");
-    // title.innerHTML = title.innerHTML + taskText;
-    // this.tasks.push(taskText);
 
     let titleContainer = document.createElement("div");
     titleContainer.classList.add("task__list-container");
@@ -54,9 +25,25 @@ class TaskList {
     let title = document.createElement("textarea");
     title.setAttribute("class", "task__list-text");
     title.addEventListener("input", autoResize, false);
-    setTimeout(() => (title.style.height = title.scrollHeight + "px"), 0);
+    title.addEventListener("input", () => {
+      console.log(JSON.stringify(this.tasks));
+      let updateTaskId;
+      title.parentNode.parentNode.parentNode.childNodes.forEach(
+        (child, index) => {
+          if (child === title.parentNode.parentNode) {
+            updateTaskId = index;
+          }
+        }
+      );
+      this.tasks[updateTaskId] = title.value;
+      console.log(JSON.stringify(this.tasks));
+    });
+    title.addEventListener("input", saveData, false);
+    setTimeout(() => {
+      title.parentNode.style.maxHeight = title.scrollHeight + "px";
+    }, 0);
     title.value = taskText;
-    this.tasks.push(taskText);
+    console.log(title.rows);
 
     let underlines = document.createElement("div");
     underlines.classList.add("task__list-underlines");
@@ -83,13 +70,18 @@ class TaskList {
       );
       this.tasks.splice(deleteTaskId, 1);
       delBtn.parentNode.parentNode.removeChild(delBtn.parentNode);
-      localStorage.setItem("taskList", JSON.stringify(this.listArray));
+      saveData();
     });
 
     taskItem.appendChild(titleContainer);
     taskItem.appendChild(delBtn);
 
     return taskItem;
+  }
+
+  createNewTask(taskText) {
+    this.tasks.push(taskText);
+    return this.renderNewTask(taskText);
   }
 
   addTask(task) {
@@ -105,35 +97,29 @@ class List {
   }
 
   renderArray() {
+    const content = document.getElementById("list");
+    this.listArray = this.listArray.map(
+      (elem) => new TaskList(elem.id, elem.name, content, elem.tasks)
+    );
+
     let taskSectionArray = document.getElementById("list");
-    this.listArray.forEach((list) => {
+    this.listArray.forEach((listObject) => {
+      console.log(listObject.tasks);
       let taskListSection = document.createElement("section");
       taskListSection.setAttribute("class", "task__list");
 
       let taskListTitle = document.createElement("h1");
       taskListTitle.setAttribute("class", "task__list-title");
-      taskListTitle.innerHTML = list.name;
-      console.log(list);
+      taskListTitle.innerHTML = listObject.name;
 
-      const listObject = new TaskList(
-        list.id,
-        list.name,
-        taskListSection,
-        list.tasks
-      );
+      // const listObject = new TaskList(
+      //   list.id,
+      //   list.name,
+      //   taskListSection,
+      //   list.tasks
+      // );
 
-      // let taskDiv = document.createElement("div");
-
-      // let taskList = document.createElement("ul");
-      // taskList.setAttribute("class", "task__list-list");
-
-      // taskDiv.appendChild(taskList);
-
-      // list.tasks.forEach((task) => {
-      //   if (task.length > 0) {
-      //     taskList.appendChild(listObject.renderTasks());
-      //   }
-      // });
+      console.log(listObject);
       let renderedTaskList = listObject.renderTasks();
 
       let newTaskInput = document.createElement("input");
@@ -166,7 +152,7 @@ class List {
           this.listArray[listIndex].createNewTask(taskText.value)
         );
         taskText.value = "";
-        localStorage.setItem("taskList", JSON.stringify(this.listArray));
+        saveData();
       });
 
       let newTaskForm = document.createElement("form");
@@ -233,7 +219,7 @@ class List {
         this.listArray[listIndex].createNewTask(taskText.value)
       );
       taskText.value = "";
-      localStorage.setItem("taskList", JSON.stringify(this.listArray));
+      saveData();
     });
 
     let newTaskForm = document.createElement("form");
@@ -251,14 +237,14 @@ class List {
 
   addList(list) {
     this.listArray.push(list);
-    localStorage.setItem("taskList", JSON.stringify(this.listArray));
+    saveData();
     return this.createNewList(list);
   }
 }
 
 // localStorage.removeItem("taskList");
 let tasker = new List();
-console.log(JSON.parse(JSON.stringify(tasker)));
+
 if (localStorage.taskList) {
   tasker.listArray = JSON.parse(localStorage.taskList);
   console.log(tasker);
@@ -275,6 +261,7 @@ addListBtn.addEventListener("click", () => {
   let id = tasker.listArray.length ? tasker.listArray.length : 0;
   const newList = tasker.addList(new TaskList(id, newListName.value, content));
   content.appendChild(newList);
+  console.log(tasker.listArray);
 
   newListName.value = "";
 
@@ -284,4 +271,12 @@ addListBtn.addEventListener("click", () => {
 function autoResize() {
   this.style.height = "auto";
   this.style.height = this.scrollHeight + "px";
+  // this.style.height = this.scrollHeight + "px";
+  this.parentNode.style.maxHeight = this.scrollHeight + "px";
+  console.log(this.scrollHeight);
+}
+
+function saveData() {
+  localStorage.setItem("taskList", JSON.stringify(tasker.listArray));
+  console.log(localStorage.taskList);
 }

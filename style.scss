@@ -109,6 +109,8 @@ header {
         position: relative;
         width: 100%;
         display: flex;
+        max-height: 21px;
+        transition: max-height .3s linear;
     }
     // .task__list-text
     &__list-text {
@@ -132,6 +134,9 @@ header {
         //     background-image: linear-gradient(rgba(0, 0, 0, 0) calc(100% - 1px), rgb(161, 161, 161) calc(100% - 1px));
         // }
         &:hover~.task__list-underlines {
+            opacity: 1;
+        }
+        &:focus~.task__list-underlines {
             opacity: 1;
         }
     }
@@ -175,12 +180,13 @@ header {
         border: none;
         background-color: transparent;
         font-weight: bold;
-        font-size: 20px;
-        padding: 10px 10px 15px 15px;
+        font-size: 12px;
+        line-height: normal;
+        padding: 4px 10px 4px 15px;
         cursor: pointer;
         transition: color .3s;
         &:hover {
-            color: rgb(177, 19, 19);
+            color: rgb(221, 25, 25);
         }
     }
 }
